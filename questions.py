@@ -45,53 +45,66 @@ else:
     print("Opción no válida. Se usará deportes.")
     words = categorias["deportes"]
 
-word = random.choice(words)
-guessed = []
-attempts = 6
-score = 0
+palabras = random.sample(words, len(words))
+indice = 0
+seguir = "s"
 
-print("¡Bienvenido al Ahorcado!")
-print()
-
-while attempts > 0:
-    progress = ""
-    for letter in word:
-        if letter in guessed:
-            progress += letter + " "
-        else:
-            progress += "_ "
-
-    print(progress)
-
-    if "_" not in progress:
-        print("¡Ganaste!")
-        score += 6
-        print(f"Puntaje final: {score}")
-        break
-
-    print(f"Intentos restantes: {attempts}")
-    print(f"Letras usadas: {', '.join(guessed)}")
-
-    letter = input("Ingresá una letra: ").lower().strip()
-
-    if len(letter) != 1 or letter not in string.ascii_lowercase:
-        print("Entrada no válida")
-        print()
-        continue
-
-    if letter in guessed:
-        print("Ya usaste esa letra.")
-    elif letter in word:
-        guessed.append(letter)
-        print("¡Bien! Esa letra está en la palabra.")
-    else:
-        guessed.append(letter)
-        attempts -= 1
-        score -= 1
-        print("Esa letra no está en la palabra.")
+while indice < len(palabras) and seguir == "s":
+    word = palabras[indice]
+    guessed = []
+    attempts = 6
+    score = 0
 
     print()
-else:
-    score = 0
-    print(f"¡Perdiste! La palabra era: {word}")
-    print(f"Puntaje final: {score}")
+    print("¡Bienvenido al Ahorcado!")
+    print()
+
+    while attempts > 0:
+        progress = ""
+        for letter in word:
+            if letter in guessed:
+                progress += letter + " "
+            else:
+                progress += "_ "
+
+        print(progress)
+
+        if "_" not in progress:
+            print("¡Ganaste!")
+            score += 6
+            print(f"Puntaje final: {score}")
+            break
+
+        print(f"Intentos restantes: {attempts}")
+        print(f"Letras usadas: {', '.join(guessed)}")
+
+        letter = input("Ingresá una letra: ").lower().strip()
+
+        if len(letter) != 1 or letter not in string.ascii_lowercase:
+            print("Entrada no válida")
+            print()
+            continue
+
+        if letter in guessed:
+            print("Ya usaste esa letra.")
+        elif letter in word:
+            guessed.append(letter)
+            print("¡Bien! Esa letra está en la palabra.")
+        else:
+            guessed.append(letter)
+            attempts -= 1
+            score -= 1
+            print("Esa letra no está en la palabra.")
+
+        print()
+    else:
+        score = 0
+        print(f"¡Perdiste! La palabra era: {word}")
+        print(f"Puntaje final: {score}")
+
+    indice += 1
+
+    if indice < len(palabras):
+        seguir = input("¿Querés jugar otra ronda? (s/n): ").lower().strip()
+    else:
+        print("Ya no quedan más palabras en esta categoría.")
