@@ -1,16 +1,49 @@
 import random
 import string
 
-words = [
-    "python",
-    "programa",
-    "variable",
-    "funcion",
-    "bucle",
-    "cadena",
-    "entero",
-    "lista",
-]
+categorias = {
+    "deportes": [
+        "futbol",
+        "tenis",
+        "padel",
+        "golf",
+        "voley",
+        "rugby",
+    ],
+    "paises": [
+        "argentina",
+        "brasil",
+        "chile",
+        "mexico",
+        "canada",
+        "espana",
+    ],
+    "comidas": [
+        "pizza",
+        "milanesa",
+        "empanada",
+        "asado",
+        "pasta",
+        "hamburguesa",
+    ],
+}
+
+print("Categorías disponibles:")
+print("1 - deportes")
+print("2 - paises")
+print("3 - comidas")
+
+opcion = input("Elegí una categoría: ").strip()
+
+if opcion == "1":
+    words = categorias["deportes"]
+elif opcion == "2":
+    words = categorias["paises"]
+elif opcion == "3":
+    words = categorias["comidas"]
+else:
+    print("Opción no válida. Se usará deportes.")
+    words = categorias["deportes"]
 
 word = random.choice(words)
 guessed = []
